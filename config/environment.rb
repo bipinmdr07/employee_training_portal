@@ -6,4 +6,4 @@ Rails.application.initialize!
 
 ENV["RAILS_ENV"] = "qa"
 
-Rails.logger = Logger.new(STDOUT)
+# Rails.logger = Logger.new(STDOUT)
