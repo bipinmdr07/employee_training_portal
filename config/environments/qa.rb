@@ -51,18 +51,18 @@ Rails.application.configure do
   config.assets.compress = false
 
   ### Logger Configuration
-  config.log_formatter = ::Logger::Formatter.new
-  config.log_level = :info
-  config.log_tags = [:request_id, :remote_ip]
+  # config.log_formatter = ::Logger::Formatter.new
+  # config.log_level = :info
+  # config.log_tags = [:request_id, :remote_ip]
 
-  config.lograge.enabled = true
-  # Prepend all log lines with the following tags.
-  config.lograge.custom_payload do |controller|
-    {
-    host: controller.request.host,
-    user_id: controller.current_user.try(:id)
-    }
-  end
+  # config.lograge.enabled = true
+  # # Prepend all log lines with the following tags.
+  # config.lograge.custom_payload do |controller|
+  #   {
+  #   host: controller.request.host,
+  #   user_id: controller.current_user.try(:id)
+  #   }
+  # end
   ActiveRecord::Base.logger = ActiveSupport::Logger.new(STDOUT)
 
 end

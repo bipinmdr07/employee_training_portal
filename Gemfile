@@ -31,7 +31,7 @@ gem 'bootstrap-datepicker-rails'
 gem 'carrierwave'
 gem 'bootstrap-sass'
 gem 'bundler', '>= 1.10.2'
-gem "lograge"
+# gem "lograge"
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -51,8 +51,8 @@ end
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
-   gem 'capistrano-rails', '~> 1.1.2'
-    gem 'capistrano-rvm'
+  gem 'capistrano-rails', '~> 1.1.2'
+  gem 'capistrano-rvm'
 end
 
 group :test do
