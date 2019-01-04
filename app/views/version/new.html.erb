@@ -1,0 +1,6 @@
+<%= form_for(:version, :url => {:controller => 'version', :action => 'create'}) do |f| %>
+  <p>Version Name:</br> <%= f.text_field(:versionname) %></p>
+  <p>Course:<br/> <%= f.select(:course_id, option_for_courses, {prompt: 'Select Course'}) %>
+  <%= f.submit("Submit") %>
+<% end %>
+<%= flash[:notice] %>

@@ -1,0 +1,11 @@
+<h1>Welcome</h1>
+Few useful links:<br/>
+<% if(@current_user.applicationroles.first && @current_user.applicationroles.first.applicationrolename == "Admin") %>
+  <%= link_to "Change User Role", applicationuserinrole_new_path %><br/>
+  <%= link_to "Add New User", signup_path %><br/>
+<% end %>
+<%= link_to "Add Course", course_new_path %><br/>
+<%= link_to "Add New Version For Course", version_new_path %><br/>
+<%= link_to "Create Event", trainingevent_new_path, { :'data-no-turbolink' =>  "true" } %><br/>
+<%= link_to "Logout", logout_path %><br/>
+<%= flash[:notice] %>

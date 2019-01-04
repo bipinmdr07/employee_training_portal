@@ -1,0 +1,6 @@
+<%= form_for(:userinrole, :url =>{:action => 'create'}) do |f| %>
+  <p>Username:</br> <%= f.text_field(:email) %></p>
+  <p><%= f.select(:role_id, option_for_userroles, {prompt: 'Select Role'}) %>
+  <%= f.submit("Submit") %>
+<% end %>
+<%= flash[:notice] %>
