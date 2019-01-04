@@ -63,7 +63,7 @@ server 'ec2-54-198-22-19.compute-1.amazonaws.com', user: 'ec2-user',  roles: %w{
 #   }
 set :ssh_options, {
   forward_agent: true,
-  keys: [Rails.root.join('ETPortal.pem')],
+  keys: ['~/ETPortal.pem'],
   auth_methods: %w(publickey),
   port: 22
 }

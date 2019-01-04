@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "employeetrainingportal"
-set :repo_url, "git@github.com:langsci-medford/employeetrainingportal.git"
+set :repo_url, "git@github.com:bipinmdr07/employee_training_portal.git"
 
 # rvm version in server. Change the rvm ruby if you are using a different rvm ruby version
 set :rvm_ruby_version, 'ruby-2.3.1'
@@ -14,7 +14,7 @@ set :rvm_ruby_version, 'ruby-2.3.1'
 
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, "/var/www/my_app_name"
- 
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
@@ -55,7 +55,7 @@ set :log_level, :debug
 
 
 # Uncomment the following to require manually verifying the host key before first deploy.
- set :ssh_options, :compression => false, verify_host_key: :secure
+set :ssh_options, :compression => false, verify_host_key: :secure
 namespace :deploy do
   desc 'Reload application'
   task :reload do
