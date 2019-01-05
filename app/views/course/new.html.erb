@@ -4,8 +4,8 @@
   <%= form_for(:course, :url => {:controller => 'course', :action => 'create'}) do |f| %>
     <p> Course Name:</br> <%= f.text_field :name%> </p>
     <p> Description:</br> <%= f.text_field :description%> </p>
-	<p> Training for Role:</br> <%= f.select(:emp_role_id, option_for_courseroles, {}, {:multiple=> true} ) %> </p>
-	<p> Version Name:<br/> <%= f.text_field :versionname%> </p>
+    <p> Training for Role:</br> <%= f.select(:emp_role_id, option_for_courseroles, {}, {:multiple=> true} ) %> </p>
+    <p> Version Name:<br/> <%= f.text_field :versionname%> </p>
     <%= f.submit :AddCourse %>
   <% end %>
 </div>

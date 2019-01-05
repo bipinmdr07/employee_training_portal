@@ -88,49 +88,49 @@ namespace :setup do
     end
   end
 
-  # desc 'Create the database.'
-  # task :db_create do
-  #   on roles(:app) do
-  #     within "#{release_path}" do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, 'db:create'
-  #       end
-  #     end
-  #   end
-  # end
+  desc 'Create the database.'
+  task :db_create do
+    on roles(:app) do
+      within "#{release_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:create'
+        end
+      end
+    end
+  end
 
-  # desc 'Seed the database.'
-  # task :db_seed do
-  #   on roles(:app) do
-  #     within "#{release_path}" do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, 'db:seed'
-  #       end
-  #     end
-  #   end
-  # end
+  desc 'Seed the database.'
+  task :db_seed do
+    on roles(:app) do
+      within "#{release_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:seed'
+        end
+      end
+    end
+  end
 
-  # desc 'reset the database.'
-  # task :db_reset do
-  #   on roles(:app) do
-  #     within "#{release_path}" do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, 'db:reset'
-  #       end
-  #     end
-  #   end
-  # end
+  desc 'reset the database.'
+  task :db_reset do
+    on roles(:app) do
+      within "#{release_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'db:reset'
+        end
+      end
+    end
+  end
 
-  # desc 'Generate the api secret key'
-  # task :api_key_gen do
-  #   on roles(:app) do
-  #     within "#{release_path}" do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, 'generate:api_key'
-  #       end
-  #     end
-  #   end
-  # end
+  desc 'Generate the api secret key'
+  task :api_key_gen do
+    on roles(:app) do
+      within "#{release_path}" do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, 'generate:api_key'
+        end
+      end
+    end
+  end
 
   # desc 'Generate the swagger api documentation'
   # task :generate_api_docs do
@@ -150,7 +150,7 @@ namespace :setup do
     #after 'deploy:migrate', 'setup:api_key_gen'
     before 'deploy:assets:precompile', 'deploy:migrate'
   end
-  
+
 
   if fetch(:reset) == 'true'
     before 'deploy:migrate', 'setup:db_reset'

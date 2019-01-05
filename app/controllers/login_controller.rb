@@ -11,16 +11,16 @@ class LoginController < ApplicationController
     else
       flash[:notice] = "Invalid Username or Password"
       flash[:color]= "invalid"
-      render "login"	
+      render "login"
     end
   end
-  
+
   def home
   end
-  
+
   def login
   end
-  
+
   def logout
     session[:user_id] = nil
     redirect_to :action => 'login'

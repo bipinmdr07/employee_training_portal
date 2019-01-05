@@ -4,9 +4,9 @@
   <%= form_for(:trainingevent, :url => {:controller => 'trainingevent', :action => 'create'}) do |f| %>
     <p> Event Name:</br> <%= f.text_field :trainingeventname%> </p>
     <p> Course:</br> <%= f.select(:courseversionid, option_for_courseversion, {prompt: 'Select Course'}) %> </p>
-	<p> Datetime: <br/> <%= f.text_field :eventdatetime, data:{ provide:'datepicker' }%> </p>
-	<p> Attendees:</br> <%= f.select(:employeeid, option_for_employeeroles, {}, {:multiple=> true} ) %> </p>
-	<p> File Upload:</br> <%= f.file_field :signupsheet %> </p>
+    <p> Datetime: <br/> <%= f.text_field :eventdatetime, data:{ provide:'datepicker' }%> </p>
+    <p> Attendees:</br> <%= f.select(:employeeid, option_for_employeeroles, {}, {:multiple=> true} ) %> </p>
+    <p> File Upload:</br> <%= f.file_field :signupsheet %> </p>
     <%= f.submit :AddEvent %>
   <% end %>
 </div>
