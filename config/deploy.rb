@@ -77,6 +77,18 @@ namespace :deploy do
   after :publishing, :reload
 end
 
+namespace :cache do
+  task :clear do
+    on roles(:app) do |host|
+      with rails_env: fetch(:rails_env) do
+        within current_path do
+          execute :bundle, :exec, "rake cache:clear"
+        end
+      end
+    end
+  end
+end
+
 # These are one time tasks for the first deploy
 namespace :setup do
   desc 'Upload database.yml and application.yml files.'
