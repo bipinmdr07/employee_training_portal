@@ -163,6 +163,8 @@ namespace :setup do
     before 'deploy:assets:precompile', 'deploy:migrate'
   end
 
+  after 'deploy:update', 'cache:clear'
+
 
   if fetch(:reset) == 'true'
     before 'deploy:migrate', 'setup:db_reset'
