@@ -50,8 +50,8 @@ set :log_level, :debug
 # Default value for :linked_files is []
  set :linked_files, %w{config/database.yml config/application.yml}
 
-# # Default value for linked_dirs is []
-# set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# Default value for linked_dirs is []
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
 # Uncomment the following to require manually verifying the host key before first deploy.
@@ -133,16 +133,16 @@ namespace :setup do
     end
   end
 
-  desc 'Generate the api secret key'
-  task :api_key_gen do
-    on roles(:app) do
-      within "#{release_path}" do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'generate:api_key'
-        end
-      end
-    end
-  end
+  # desc 'Generate the api secret key'
+  # task :api_key_gen do
+  #   on roles(:app) do
+  #     within "#{release_path}" do
+  #       with rails_env: fetch(:rails_env) do
+  #         execute :rake, 'generate:api_key'
+  #       end
+  #     end
+  #   end
+  # end
 
   # desc 'Generate the swagger api documentation'
   # task :generate_api_docs do
