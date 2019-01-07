@@ -1,13 +1,15 @@
-# config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
+# config valid only for current version of Capistrano
+#lock '3.9.1'
 
-set :application, "employeetrainingportal"
-set :repo_url, "git@github.com:bipinmdr07/employee_training_portal.git"
+set :application, 'r3'
+set :repo_url, 'git@github.com:langsci-medford/R3.git'
 
 # rvm version in server. Change the rvm ruby if you are using a different rvm ruby version
 set :rvm_ruby_version, 'ruby-2.3.1'
 
-#set :deploy_to, '/home/ec2-user/projects/qa/ETP/'
+set :initial, ENV['initial'] || 'false'
+set :import, ENV['import'] || 'false'
+
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -34,9 +36,6 @@ set :pty, true
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
-# Default value for local_user is ENV['USER']
-# set :local_user, -> { `git config user.name`.chomp }
-
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
@@ -46,23 +45,20 @@ set :format, :pretty
 # Default value for :log_level is :debug
 set :log_level, :debug
 
-
 # Default value for :linked_files is []
- set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_files, %w{config/database.yml config/application.yml}
 
-# # Default value for linked_dirs is []
-# set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# Default value for linked_dirs is []
+set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 
-# Uncomment the following to require manually verifying the host key before first deploy.
-set :ssh_options, :compression => false, verify_host_key: :secure
 namespace :deploy do
   desc 'Reload application'
   task :reload do
     desc 'Reload app after change'
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here, for example:
-     # execute :touch, release_path.join('tmp/restart.txt')
+      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
@@ -74,20 +70,14 @@ namespace :deploy do
       end
     end
   end
+
+  # after :finishing, 'deploy:update_cron'
   after :publishing, :reload
 end
 
-# namespace :cache do
-#   task :clear do
-#     on roles(:app) do |host|
-#       with rails_env: fetch(:rails_env) do
-#         within current_path do
-#           execute :bundle, :exec, "rake cache:clear"
-#         end
-#       end
-#     end
-#   end
-# end
+def rvm_prefix
+  "#{fetch(:rvm_path)}/bin/rvm #{fetch(:rvm_ruby_version)} do"
+end
 
 # These are one time tasks for the first deploy
 namespace :setup do
@@ -133,47 +123,23 @@ namespace :setup do
     end
   end
 
-  desc 'Generate the api secret key'
-  task :api_key_gen do
-    on roles(:app) do
-      within "#{release_path}" do
-        with rails_env: fetch(:rails_env) do
-          execute :rake, 'generate:api_key'
-        end
-      end
-    end
-  end
-
-  # desc 'Generate the swagger api documentation'
-  # task :generate_api_docs do
-  #   on roles(:app) do
-  #     within "#{release_path}" do
-  #       with rails_env: fetch(:rails_env) do
-  #         execute :rake, 'swagger:docs'
-  #       end
-  #     end
-  #   end
-  # end
 
   before 'deploy:starting', 'setup:yml'
   if fetch(:initial) == 'true'
     before 'deploy:migrate', 'setup:db_create'
     after 'deploy:migrate', 'setup:db_seed'
-    #after 'deploy:migrate', 'setup:api_key_gen'
     before 'deploy:assets:precompile', 'deploy:migrate'
   end
-
-  # after 'deploy:update', 'cache:clear'
 
 
   if fetch(:reset) == 'true'
     before 'deploy:migrate', 'setup:db_reset'
     after 'deploy:migrate', 'setup:db_seed'
-    #after 'deploy:migrate', 'setup:api_key_gen'
     before 'deploy:assets:precompile', 'deploy:migrate'
   end
-  #after 'deploy:finished', 'aws_receive_message:restart'
-  #after 'deploy:finished', 'setup:generate_api_docs'
-  #after 'deploy:finished', 'sidekiq:restart'
+
+  before "deploy:assets:precompile", "deploy:npm_install"
 
 end
+
+
