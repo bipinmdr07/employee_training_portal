@@ -8,7 +8,6 @@ set :repo_url, 'git@github.com:langsci-medford/R3.git'
 set :rvm_ruby_version, 'ruby-2.3.1'
 
 set :initial, ENV['initial'] || 'false'
-set :import, ENV['import'] || 'false'
 
 
 # Default branch is :master
@@ -137,8 +136,6 @@ namespace :setup do
     after 'deploy:migrate', 'setup:db_seed'
     before 'deploy:assets:precompile', 'deploy:migrate'
   end
-
-  before "deploy:assets:precompile", "deploy:npm_install"
 
 end
 
