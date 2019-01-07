@@ -1,8 +1,8 @@
 # config valid only for current version of Capistrano
 #lock '3.9.1'
 
-set :application, 'r3'
-set :repo_url, 'git@github.com:langsci-medford/R3.git'
+set :application, 'employeetrainingportal'
+set :repo_url, 'git@github.com:bipinmdr07/employee_training_portal.git'
 
 # rvm version in server. Change the rvm ruby if you are using a different rvm ruby version
 set :rvm_ruby_version, 'ruby-2.3.1'
