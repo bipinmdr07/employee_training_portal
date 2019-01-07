@@ -121,7 +121,7 @@ namespace :setup do
       end
     end
   end
-
+  
 
   before 'deploy:starting', 'setup:yml'
   if fetch(:initial) == 'true'
