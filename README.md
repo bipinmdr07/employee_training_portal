@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Steps to follow:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Move your __.pem__ file to home directory. (*__important__)
+2. cd to root project directory and checkout to qa branch using command:
+```ruby
+$ git checkout qa
+```
+3. Then run
+```ruby
+$ cap qa deploy
+```
